@@ -1,13 +1,22 @@
 import React from "react";
-import { StyleSheet, Text, ImageBackground, View } from "react-native";
-
-import { teacherAllClassesFetch } from "../utilities/fetchCalls";
+import {
+  StyleSheet,
+  Text,
+  ImageBackground,
+  View,
+  TouchableOpacity
+} from "react-native";
 
 export default class StudentRow extends React.Component {
   render() {
     const { student, selectStudent } = this.props;
     return (
-      <View style={styles.studentRow}>
+      <TouchableOpacity
+        onPress={() => {
+          this.props.selectStudent(student);
+        }}
+        style={styles.studentRow}
+      >
         <Text style={styles.studentName}>
           {student.attributes.first_name[0]}. {student.attributes.last_name}
         </Text>
@@ -44,7 +53,7 @@ export default class StudentRow extends React.Component {
             2.8
           )}
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   }
 }

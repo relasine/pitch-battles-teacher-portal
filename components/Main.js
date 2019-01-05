@@ -3,6 +3,7 @@ import { StyleSheet, Text, ImageBackground, View } from "react-native";
 import AllClasses from "./AllClasses";
 import Nav from "./Nav";
 import SingleClass from "./SingleClass";
+import Student from "./Student";
 
 import { teacherAllClassesFetch } from "../utilities/fetchCalls";
 
@@ -15,7 +16,8 @@ export default class Main extends React.Component {
       classes: [],
       error: false,
       errorMessage: undefined,
-      selectedClassId: undefined
+      selectedClassId: undefined,
+      selectedStudent: undefined
     };
   }
 
@@ -47,6 +49,13 @@ export default class Main extends React.Component {
     });
   };
 
+  selectStudent = student => {
+    this.setState({
+      currentPage: "single student",
+      selectedStudent: student
+    });
+  };
+
   render() {
     return (
       <View style={styles.main}>
@@ -62,6 +71,14 @@ export default class Main extends React.Component {
           <SingleClass
             webToken={this.props.webToken}
             id={this.state.selectedClassId}
+            selectStudent={this.selectStudent}
+          />
+        )}
+        {this.state.currentPage === "single student" && (
+          <Student
+            student={this.state.selectedStudent}
+            webToken={this.props.webToken}
+            navigate={this.props.navigate}
           />
         )}
         <Nav navigate={this.navigate} />
