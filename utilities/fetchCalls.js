@@ -83,7 +83,6 @@ export const changeProfileFetch = async (name, id, webToken) => {
 export const changePasswordFetch = async (
   oldPassword,
   newPassword,
-  id,
   webToken
 ) => {
   const url = `https://pitch-battles-api.herokuapp.com/api/v1/users/`;

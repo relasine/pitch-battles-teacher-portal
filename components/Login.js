@@ -132,6 +132,14 @@ export default class Login extends React.Component {
           accessibilityLabel="sign up for a pitch battles account"
           style={styles.btn}
         />
+        <View style={styles.forgotBumper}>
+          <Button
+            onPress={this.props.navigateToForgotPassword}
+            title="forgot my password"
+            accessibilityLabel="I forgot my password"
+            style={styles.btn}
+          />
+        </View>
         {this.state.fetching && (
           <Text style={styles.message}>Logging you in...</Text>
         )}
@@ -156,7 +164,8 @@ const styles = StyleSheet.create({
     position: "relative"
   },
   loginLabel: {
-    margin: 12
+    margin: 12,
+    fontWeight: "bold"
   },
   inputs: {
     margin: 8,
@@ -170,5 +179,8 @@ const styles = StyleSheet.create({
   message: {
     position: "absolute",
     top: 20
+  },
+  forgotBumper: {
+    marginTop: 48
   }
 });

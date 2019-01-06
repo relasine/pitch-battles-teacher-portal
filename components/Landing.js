@@ -1,6 +1,8 @@
 import React from "react";
 import Login from "./Login";
 import Signup from "./Signup";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
 
 export default class Landing extends React.Component {
@@ -10,7 +12,8 @@ export default class Landing extends React.Component {
     this.state = {
       loginActive: true,
       signupActive: false,
-      forgotPassword: false
+      forgotPassword: false,
+      resetPassword: false
     };
   }
 
@@ -18,7 +21,8 @@ export default class Landing extends React.Component {
     this.setState({
       loginActive: true,
       signupActive: false,
-      forgotPassword: false
+      forgotPassword: false,
+      resetPassword: false
     });
   };
 
@@ -26,7 +30,8 @@ export default class Landing extends React.Component {
     this.setState({
       loginActive: false,
       signupActive: true,
-      forgotPassword: false
+      forgotPassword: false,
+      resetPassword: false
     });
   };
 
@@ -34,7 +39,17 @@ export default class Landing extends React.Component {
     this.setState({
       loginActive: false,
       signupActive: false,
-      forgotPassword: true
+      forgotPassword: true,
+      resetPassword: false
+    });
+  };
+
+  navigateToToken = () => {
+    this.setState({
+      loginActive: false,
+      signupActive: false,
+      forgotPassword: false,
+      resetPassword: true
     });
   };
 
@@ -50,6 +65,15 @@ export default class Landing extends React.Component {
         )}
         {this.state.signupActive && (
           <Signup navigateToLogin={this.navigateToLogin} />
+        )}
+        {this.state.forgotPassword && (
+          <ForgotPassword
+            navigateToToken={this.navigateToToken}
+            navigateToLogin={this.navigateToLogin}
+          />
+        )}
+        {this.state.resetPassword && (
+          <ResetPassword back={this.navigateToLogin} />
         )}
       </View>
     );

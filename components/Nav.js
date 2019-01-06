@@ -22,7 +22,10 @@ export default class Nav extends React.Component {
             style={styles.homeIcon}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.navBtns, styles.accountBtn]}>
+        <TouchableOpacity
+          onPress={() => this.props.navigate("account")}
+          style={[styles.navBtns, styles.accountBtn]}
+        >
           <ImageBackground
             source={require("../images/account.png")}
             style={styles.accountIcon}

@@ -15,8 +15,16 @@ export default class App extends React.Component {
     };
   }
 
+  logout = () => {
+    this.setState({
+      user: undefined,
+      webToken: "",
+      response: undefined
+    });
+  };
+
   setWebToken = webToken => {
-    this.setState(webToken);
+    this.setState({ webToken });
   };
 
   setUser = user => {
@@ -38,7 +46,12 @@ export default class App extends React.Component {
         <Header />
         {!this.state.user && <Landing login={this.login} />}
         {this.state.user && (
-          <Main webToken={this.state.webToken} user={this.state.user} />
+          <Main
+            setWebToken={this.setWebToken}
+            webToken={this.state.webToken}
+            user={this.state.user}
+            logout={this.logout}
+          />
         )}
       </View>
     );

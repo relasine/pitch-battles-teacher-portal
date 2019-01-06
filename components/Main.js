@@ -4,8 +4,9 @@ import AllClasses from "./AllClasses";
 import Nav from "./Nav";
 import SingleClass from "./SingleClass";
 import Student from "./Student";
+import Account from "./Account";
 
-import { teacherAllClassesFetch } from "../utilities/fetchCalls";
+import { teacherAllClassesFetch, userFetch } from "../utilities/fetchCalls";
 
 export default class Main extends React.Component {
   constructor() {
@@ -56,6 +57,20 @@ export default class Main extends React.Component {
     });
   };
 
+  prelogout = () => {
+    this.setState(
+      {
+        currentPage: "all classes",
+        classes: [],
+        error: false,
+        errorMessage: undefined,
+        selectedClassId: undefined,
+        selectedStudent: undefined
+      },
+      this.props.logout
+    );
+  };
+
   render() {
     return (
       <View style={styles.main}>
@@ -78,7 +93,16 @@ export default class Main extends React.Component {
           <Student
             student={this.state.selectedStudent}
             webToken={this.props.webToken}
-            navigate={this.props.navigate}
+            navigate={this.navigate}
+          />
+        )}
+        {this.state.currentPage === "account" && (
+          <Account
+            email={this.props.user.attributes.email}
+            setWebToken={this.props.setWebToken}
+            id={this.props.user.id}
+            webToken={this.props.webToken}
+            logout={this.prelogout}
           />
         )}
         <Nav navigate={this.navigate} />
@@ -91,6 +115,7 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: "space-around",
-    width: "100%"
+    width: "100%",
+    backgroundColor: "#f2f2f2"
   }
 });

@@ -1,22 +1,20 @@
 import React from "react";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
-import { signUp } from "../utilities/fetchCalls";
+import { resetPasswordFetch } from "../utilities/fetchCalls";
 
-export default class Singup extends React.Component {
+export default class ResetPassword extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      first_name: "",
-      last_name: "",
-      email: "",
       password: "",
       confirm_password: "",
       passwordMatchError: false,
-      emailInUse: false,
+      webToken: "",
       success: false,
       missingFields: false,
-      loading: false
+      loading: false,
+      webTokenError: false
     };
   }
 
@@ -31,17 +29,15 @@ export default class Singup extends React.Component {
 
   handleSubmit = () => {
     if (
-      !this.state.first_name ||
-      !this.state.last_name ||
-      !this.state.email ||
       !this.state.password ||
-      !this.state.confirm_password
+      !this.state.confirm_password ||
+      !this.state.webToken
     ) {
       this.setState({
         missingFields: true
       });
     } else if (this.state.password === this.state.confirm_password) {
-      this.callSignup();
+      this.callReset();
     } else {
       this.setState({
         passwordMatchError: true,
@@ -52,22 +48,13 @@ export default class Singup extends React.Component {
     }
   };
 
-  callSignup = async () => {
-    const body = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
-      email: this.state.email,
-      password: this.state.password,
-      password_confirm: this.state.password_confirm,
-      role: 1
-    };
-
+  callReset = async () => {
     this.setState({
       fetching: true
     });
 
     try {
-      await signUp(body);
+      await resetPasswordFetch(this.state.password, this.state.webToken);
       this.setState({
         success: true,
         passwordMatchError: false,
@@ -77,7 +64,7 @@ export default class Singup extends React.Component {
       });
     } catch (error) {
       this.setState({
-        emailInUse: true,
+        webTokenError: true,
         success: false,
         missingFields: false,
         fetching: false
@@ -89,28 +76,8 @@ export default class Singup extends React.Component {
     return (
       <View style={styles.container}>
         <Text style={[{ marginBottom: 20 }, { fontWeight: "bold" }]}>
-          Create an account:
+          Reset your password:
         </Text>
-        <TextInput
-          onChangeText={text => this.handleChange(text, "first_name")}
-          value={this.state.first_name}
-          placeholder="first name"
-          style={styles.inputs}
-        />
-        <TextInput
-          onChangeText={text => this.handleChange(text, "last_name")}
-          value={this.state.last_name}
-          placeholder="last name"
-          style={styles.inputs}
-        />
-        <TextInput
-          onChangeText={text => this.handleChange(text, "email")}
-          value={this.state.email}
-          placeholder="email"
-          style={styles.inputs}
-          textContentType="emailAddress"
-          autoCapitalize="none"
-        />
         <TextInput
           onChangeText={text => this.handleChange(text, "password")}
           value={this.state.password}
@@ -125,26 +92,29 @@ export default class Singup extends React.Component {
           style={styles.inputs}
           secureTextEntry={true}
         />
+        <TextInput
+          onChangeText={text => this.handleChange(text, "webToken")}
+          value={this.state.webToken}
+          placeholder="webtoken"
+          style={styles.inputs}
+        />
         <Button
           onPress={this.handleSubmit}
-          title="signup"
-          accessibilityLabel="sign up for a pitch battles account"
+          title="submit"
+          accessibilityLabel="reset your password"
         />
-        <Button
-          onPress={this.props.navigateToLogin}
-          title="login"
-          accessibilityLabel="login to pitch battles teacher portal"
-        />
+        <View style={{ marginTop: 48 }}>
+          <Button
+            onPress={this.props.back}
+            title="back"
+            accessibilityLabel="go back"
+          />
+        </View>
         {this.state.success && (
-          <Text style={styles.messages}>Successfully created account!</Text>
+          <Text style={styles.messages}>Successfully reset your password!</Text>
         )}
         {this.state.passwordMatchError && (
           <Text style={styles.messages}>Passwords do not match.</Text>
-        )}
-        {this.state.emailInUse && (
-          <Text style={styles.messages}>
-            Email address already linked to an account.
-          </Text>
         )}
         {this.state.missingFields && (
           <Text style={styles.messages}>

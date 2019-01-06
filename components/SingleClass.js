@@ -63,9 +63,9 @@ export default class SingleClass extends React.Component {
 
     return (
       <ScrollView style={styles.singleClass}>
-        {this.state.loading && <Text>Loading...</Text>}
+        {this.state.loading && <Text style={styles.loading}>Loading...</Text>}
         {this.state.klass && (
-          <View>
+          <View style={styles.classWrapper}>
             <Text style={styles.className}>{this.state.klass.name}</Text>
             <View style={styles.classTable}>
               <View style={styles.classRow}>
@@ -86,27 +86,38 @@ export default class SingleClass extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  classWrapper: {
+    margin: "auto"
+  },
   className: {
     textAlign: "center",
     fontWeight: "bold",
     fontSize: 18,
     margin: 12,
     marginBottom: 24,
-    justifyContent: "space-between"
+    justifyContent: "space-around"
   },
   classRow: {
     flex: 1,
     flexDirection: "row",
-    marginBottom: 16
+    marginBottom: 16,
+    justifyContent: "space-around"
   },
   classRowText: {
     width: 50,
-    marginLeft: 2,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: "center"
   },
   classRowTextName: {
     width: 100,
     marginLeft: 8,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  loading: {
+    fontSize: 20,
+    fontWeight: "bold",
+    margin: 20,
+    textAlign: "center"
   }
 });

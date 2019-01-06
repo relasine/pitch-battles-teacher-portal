@@ -62,11 +62,12 @@ const styles = StyleSheet.create({
   studentRow: {
     flex: 1,
     flexDirection: "row",
-    marginBottom: 16
+    marginBottom: 16,
+    justifyContent: "space-around"
   },
   studentRowText: {
     width: 50,
-    marginLeft: 2
+    textAlign: "center"
   },
   studentName: {
     width: 100,
