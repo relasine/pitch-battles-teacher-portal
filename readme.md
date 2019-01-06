@@ -22,11 +22,11 @@ Pitch Battles Teacher Portal is a React Native application built as a companion 
 ### Screenshots
 
 <div style='max-width: 300px'>
-<img src='https://user-images.githubusercontent.com/29719272/50739176-d0aa4900-1199-11e9-85ba-77c9442dba67.png' />
+<img src='https://user-images.githubusercontent.com/29719272/50739176-d0aa4900-1199-11e9-85ba-77c9442dba67.png' style='max-width: 300px'/>
 
-<img src='https://user-images.githubusercontent.com/29719272/50739170-b4a6a780-1199-11e9-86e3-5c1737be8f3c.png' />
+<img src='https://user-images.githubusercontent.com/29719272/50739170-b4a6a780-1199-11e9-86e3-5c1737be8f3c.png' style='max-width: 300px'/>
 
-<img src='https://user-images.githubusercontent.com/29719272/50739160-980a6f80-1199-11e9-9757-d89907f0e498.png' />
+<img src='https://user-images.githubusercontent.com/29719272/50739160-980a6f80-1199-11e9-9757-d89907f0e498.png' style='max-width: 300px'/>
 
-<img src='https://user-images.githubusercontent.com/29719272/50739165-a5275e80-1199-11e9-9b88-3732431f7574.png' />
+<img src='https://user-images.githubusercontent.com/29719272/50739165-a5275e80-1199-11e9-9b88-3732431f7574.png' style='max-width: 300px'/>
 </div>
